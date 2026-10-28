@@ -1,62 +1,29 @@
-## Requirements
-
-- Python **3.11 – 3.14** (including 3.14.x)
-
 # DataMind AI
 
-**DataMind AI** is a reproducible data science and machine learning research toolkit.
+**Version:** 0.2.0  
+**Python:** 3.11 – 3.14 (including 3.14.x)
+
+DataMind AI is a reproducible data science and machine learning research toolkit.
 It focuses on transparent pipelines: synthetic research data, cleaning, statistics,
 feature engineering, baseline and gradient-descent models, explainability,
 SQLite analytics, and an optional Streamlit dashboard.
 
 ## Features
 
-- Synthetic housing dataset with fixed-seed generation
-- Schema validation and cleaning (imputation, outlier clipping, standardization)
+- Four research datasets (housing, diabetes, iris, wine) with fixed-seed generation
+- Schema validation and cleaning (imputation, outlier checks, standardization)
+- Preprocessing pipeline: impute → scale → one-hot (train-only fit)
 - Exploratory statistics and correlation analysis
 - Feature engineering (ratios, polynomials, log target)
-- Mean baseline and linear regression via batch gradient descent
-- Ridge closed-form solver and educational GD utilities
+- 5 regression + 4 classification models (mean, linear GD, ridge, kNN, median; majority, logistic GD, kNN, threshold)
+- Evaluation metrics: MAE/RMSE/R²; accuracy/precision/recall/F1/ROC-AUC/confusion matrix
+- Experiment runner with `ExperimentResult` metadata
+- Ridge / closed-form OLS and educational batch gradient descent
 - Coefficient and permutation feature importance
-- Residual uncertainty and bootstrap metric intervals
-- SQLite experiment logging and SQL queries
-- Streamlit dashboard for interactive exploration
-- Pytest suite with coverage gate (80%+)
-
-## Quick start
-
-```bash
-poetry install --no-interaction --with dev
-make test
-make data
-poetry run streamlit run src/datamind/app/dashboard.py  # optional UI extra
-```
-
-## Project layout
-
-```
-src/datamind/
-  data/        ingestion, schema, cleaning
-  stats/       summaries and outlier analysis
-  features/    engineering and splits
-  models/      baselines, metrics, persistence
-  math/        gradient descent, regularization
-  explain/     importance and uncertainty
-  analytics/   SQLite + reports
-  app/         Streamlit dashboard
-tests/         unit and integration tests
-docs/          design notes, model card, backlog
-```
-
-## Research scope
-
-DataMind AI is an **educational / research engineering** codebase. The default
-dataset is synthetic. Do not treat model outputs as production valuations.
-
-## License
-
-MIT
-
+- Residual uncertainty and bootstrap-style metric helpers
+- SQLite analytics (GROUP BY, window RANK) and report export
+- Streamlit UI: Overview, ML Workbench, Math Lab
+- Pytest suite with coverage gate (75%+)
 
 ## Module checklist
 
@@ -73,7 +40,21 @@ MIT
 | Streamlit (Overview + Workbench + Math Lab) | yes |
 | Tests + CI (`tests.yml`) | yes |
 
+## Quick start
+
+### pip + venv (recommended on Python 3.14)
+
 ```bash
-poetry run streamlit run app.py
-poetry run python scripts/run_baseline_experiments.py
-```
+python -m venv .venv
+# Windows: .\.venv\Scripts\activate
+# macOS/Linux: source .venv/bin/activate
+pip install -r requirements.txt
+
+# Windows
+set PYTHONPATH=src
+# macOS/Linux
+export PYTHONPATH=src
+
+python -m pytest
+streamlit run app.py
+python scripts/run_baseline_experiments.py
