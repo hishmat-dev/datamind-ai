@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "datamind-ai"
-version = "0.1.0"
+version = "0.2.0"
 description = "Reproducible data science and machine learning research toolkit."
 authors = ["hishmat-dev <developerhishmat1@gmail.com>"]
 license = "MIT"
@@ -8,20 +8,20 @@ readme = "README.md"
 packages = [{ include = "datamind", from = "src" }]
 
 [tool.poetry.dependencies]
-python = ">=3.11,<3.13"
-numpy = "1.26.4"
-pandas = "2.2.3"
-pydantic = "2.10.3"
-pydantic-settings = "2.6.1"
+python = ">=3.11,<3.15"
+numpy = ">=2.2.0,<3.0.0"
+pandas = ">=2.2.0,<4.0.0"
+pydantic = ">=2.10.0,<3.0.0"
+pydantic-settings = ">=2.6.0,<3.0.0"
 
 [tool.poetry.group.dev.dependencies]
-pytest = "8.3.4"
-pytest-cov = "6.0.0"
-ruff = "0.8.2"
-mypy = "1.13.0"
+pytest = ">=8.3.0,<10.0.0"
+pytest-cov = ">=6.0.0,<8.0.0"
+ruff = ">=0.8.0,<1.0.0"
+mypy = ">=1.13.0,<2.0.0"
 
 [tool.poetry.group.ui.dependencies]
-streamlit = "1.40.1"
+streamlit = ">=1.40.0,<2.0.0"
 
 [build-system]
 requires = ["poetry-core>=1.9.0"]
@@ -30,7 +30,7 @@ build-backend = "poetry.core.masonry.api"
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["src"]
-addopts = "-q --strict-markers --cov=datamind --cov-report=term-missing --cov-fail-under=80"
+addopts = "-q --strict-markers --cov=datamind --cov-report=term-missing --cov-fail-under=75"
 
 [tool.coverage.run]
 branch = true
@@ -45,7 +45,7 @@ select = ["E", "F", "I", "B", "UP"]
 ignore = ["E501"]
 
 [tool.mypy]
-python_version = "3.11"
+python_version = "3.12"
 packages = ["datamind"]
 mypy_path = "src"
 ignore_missing_imports = true

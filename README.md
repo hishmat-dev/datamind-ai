@@ -1,3 +1,7 @@
+## Requirements
+
+- Python **3.11 – 3.14** (including 3.14.x)
+
 # DataMind AI
 
 **DataMind AI** is a reproducible data science and machine learning research toolkit.
