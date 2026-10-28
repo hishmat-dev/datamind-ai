@@ -12,11 +12,13 @@ def write_metrics_report(
     path.parent.mkdir(parents=True, exist_ok=True)
     lines = [f"# {title}", "", "## Metrics", ""]
     for k, v in metrics.items():
-        lines.append(f"- **{k}**: {v:.6f}" if isinstance(v, float) else f"- **{k}**: {v}")
+        if isinstance(v, float):
+            lines.append(f"- **{k}**: {v:.6f}")
+        else:
+            lines.append(f"- **{k}**: {v}")
     if extra_lines:
         lines.extend(["", "## Notes", ""])
         lines.extend(f"- {line}" for line in extra_lines)
     lines.append("")
-    path.write_text("
-".join(lines))
+    path.write_text("\n".join(lines))
     return path
