@@ -52,3 +52,24 @@ dataset is synthetic. Do not treat model outputs as production valuations.
 ## License
 
 MIT
+
+
+## Module checklist
+
+| Module | Status |
+|--------|--------|
+| Data load + validation (4 datasets) | yes |
+| Preprocessing (impute → scale → one-hot) | yes |
+| Models (5 regression + 4 classification) | yes |
+| Evaluation (reg + clf metrics) | yes |
+| Experiment runner | yes |
+| Gradient descent lab vs OLS | yes |
+| Explainability | yes |
+| SQL analytics (GROUP BY, RANK) | yes |
+| Streamlit (Overview + Workbench + Math Lab) | yes |
+| Tests + CI (`tests.yml`) | yes |
+
+```bash
+poetry run streamlit run app.py
+poetry run python scripts/run_baseline_experiments.py
+```

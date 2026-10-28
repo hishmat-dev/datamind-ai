@@ -1,0 +1,23 @@
+name: Tests
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - run: pip install poetry==1.8.5
+      - run: poetry install --no-interaction --with dev
+      - run: poetry run ruff check src tests
+      - run: poetry run pytest --cov=datamind --cov-fail-under=75
